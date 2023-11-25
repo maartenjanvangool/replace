@@ -12,13 +12,13 @@ import java.nio.file.Paths
 /**
  * https://micronaut-projects.github.io/micronaut-picocli/latest/guide/
  */
-@Command(name = "replace", description = ["..."], mixinStandardHelpOptions = true)
+@Command(name = "replace", description = ["An app to find and replace stuff in files or in input text."], mixinStandardHelpOptions = true)
 class Replace : Runnable {
 
-    @CommandLine.Option(names = ["-f", "--file"], paramLabel = "ARCHIVE", description = ["the archive file"])
+    @CommandLine.Option(names = ["-f", "--file"], paramLabel = "ARCHIVE", description = ["The inputfile"])
     private var archive: File? = null
 
-    @CommandLine.Option(names = ["-t", "--text"], paramLabel = "ARCHIVE", description = ["the archive file"])
+    @CommandLine.Option(names = ["-t", "--text"], paramLabel = "ARCHIVE", description = ["The input text"])
     private var input: String? = null
 
     @Parameters(index = "0", description = ["What to find"])
