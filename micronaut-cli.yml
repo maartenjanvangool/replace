@@ -1,0 +1,6 @@
+applicationType: cli
+defaultPackage: nl.craftsmen
+testFramework: junit
+sourceLanguage: kotlin
+buildTool: maven
+features: [app-name, graalvm, http-client-test, junit, kapt, kotlin, logback, maven, maven-enforcer-plugin, picocli, picocli-junit, picocli-kotlin-application, properties, readme, serialization-jackson, shade]
