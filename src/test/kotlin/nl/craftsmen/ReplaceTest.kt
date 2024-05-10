@@ -32,10 +32,18 @@ class ReplaceTest {
 
     @Test
     fun `input text is replaced`() {
-        val args = arrayOf("-t", "blablabla", "bla", "vla")
+        val args = arrayOf("blablabla", "bla", "vla")
         PicocliRunner.run(Replace::class.java, ctx, *args)
 
         baos.toString().trimIndent() `should be equal to` "vlavlavla"
+    }
+
+    @Test
+    fun `input text is replaced with first only flag`() {
+        val args = arrayOf("blablabla", "bla", "vla","--first")
+        PicocliRunner.run(Replace::class.java, ctx, *args)
+
+        baos.toString().trimIndent() `should be equal to` "vlablabla"
     }
 
     @Test
@@ -47,5 +55,13 @@ class ReplaceTest {
         PicocliRunner.run(Replace::class.java, ctx, *args)
 
         baos.toString().trimIndent().trimIndent() `should be equal to` "vlavlavla"
+    }
+
+    @Test
+    fun `input text is replaced from a specific index with first only flag`() {
+        val args = arrayOf("blablabla", "bla", "vla","--first", "2")
+        PicocliRunner.run(Replace::class.java, ctx, *args)
+
+        baos.toString().trimIndent() `should be equal to` "blavlabla"
     }
 }

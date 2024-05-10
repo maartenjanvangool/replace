@@ -16,11 +16,11 @@ import java.nio.file.Paths
 @Command(name = "replace", description = ["An app to find and replace stuff in files or in input text."], mixinStandardHelpOptions = true)
 class Replace : Runnable {
 
-    @CommandLine.Option(names = ["-f", "--file"], paramLabel = "<filename>", description = ["input is a filelocation"])
+    @CommandLine.Option(names = ["-f", "--file"], paramLabel = "<filename>", description = ["input is a file path"])
     private var isFile: Boolean = false
 
-    @CommandLine.Option(names = ["-t", "--text"], paramLabel = "string", description = ["input is text"])
-    private var isLiteral: Boolean = false
+    @CommandLine.Option(names = ["--first"], paramLabel = "Replace the first occurrence (if any exist) only")
+    private var firstOnly: Boolean = false
 
     @Parameters(index = "0", description = ["Input, either a file or a literal"])
     private var input: String = ""
@@ -31,11 +31,18 @@ class Replace : Runnable {
     @Parameters(index = "2", description = ["What to replace it by."])
     private var replace: String = ""
 
+    @Parameters(index = "3", description = ["From index"], defaultValue = "0")
+    private var index: Int = 0
+
     override fun run() {
         if (isFile) {
             input = String(Files.readAllBytes(Paths.get(URI("file:///$input"))))
         }
-        println(input.replace(find, replace))
+        if(firstOnly) {
+            println(input.substring(0, index) + input.substring(index).replaceFirst(find, replace))
+        } else {
+            println(input.substring(0, index) + input.substring(index).replace (find, replace))
+        }
     }
 
     companion object {
