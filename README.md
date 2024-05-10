@@ -4,7 +4,7 @@ A small CLI app for me to experiment with GraalVM, Micronaut and PicoCli. It doe
 
 ## Installation
 ```bash
-curl -L -O https://github.com/maartenjanvangool/replace/releases/download/0.1/replace
+curl -L -O https://github.com/maartenjanvangool/replace/releases/download/0.2/replace
 chmod +x replace
 sudo mv replace /usr/bin/replace
 ```
