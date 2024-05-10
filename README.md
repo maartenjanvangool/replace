@@ -4,15 +4,15 @@ A small CLI app for me to experiment with GraalVM, Micronaut and PicoCli. It doe
 
 ## Installation
 ```bash
-curl ""
+curl -L -O https://github.com/maartenjanvangool/replace/releases/download/0.1/replace
+chmod +x replace
 sudo mv replace /usr/bin/replace
-
 ```
-## usage
 
+## Usage
 String replacement: 
 ```bash
-replace -t "blablabla" "bla" "la" 
+replace "blablabla" "bla" "la" 
 ```
 
 Replace stuff from a file:
@@ -20,9 +20,8 @@ Replace stuff from a file:
 replace -f "bla.txt" "bla" "la" > la.txt 
 ```
 
-## Build native package
+## Build native executable
 
 ```bash
-mvn clean package
-native-image -jar target/replace-0.1.jar
+./mvnw package -Dpackaging=native-image
 ```

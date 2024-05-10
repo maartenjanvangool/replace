@@ -4,7 +4,7 @@ import io.micronaut.configuration.picocli.PicocliRunner
 import picocli.CommandLine
 import picocli.CommandLine.Command
 import picocli.CommandLine.Parameters
-import java.io.File
+import java.net.URI
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -16,27 +16,26 @@ import java.nio.file.Paths
 @Command(name = "replace", description = ["An app to find and replace stuff in files or in input text."], mixinStandardHelpOptions = true)
 class Replace : Runnable {
 
-    @CommandLine.Option(names = ["-f", "--file"], paramLabel = "ARCHIVE", description = ["The inputfile"])
-    private var file: File? = null
+    @CommandLine.Option(names = ["-f", "--file"], paramLabel = "<filename>", description = ["input is a filelocation"])
+    private var isFile: Boolean = false
 
-    @CommandLine.Option(names = ["-t", "--text"], paramLabel = "ARCHIVE", description = ["The input text"])
-    private var input: String? = null
+    @CommandLine.Option(names = ["-t", "--text"], paramLabel = "string", description = ["input is text"])
+    private var isLiteral: Boolean = false
 
-    @Parameters(index = "0", description = ["What to find"])
+    @Parameters(index = "0", description = ["Input, either a file or a literal"])
+    private var input: String = ""
+
+    @Parameters(index = "1", description = ["What to find"])
     private var find: String = ""
 
-    @Parameters(index = "1", description = ["What to replace it by."])
+    @Parameters(index = "2", description = ["What to replace it by."])
     private var replace: String = ""
 
     override fun run() {
-        if(file==null && input==null){
-            println("Input is empty!")
-            return
+        if (isFile) {
+            input = String(Files.readAllBytes(Paths.get(URI("file:///$input"))))
         }
-        if (file != null) {
-            input = String(Files.readAllBytes(Paths.get(file!!.toURI())))
-        }
-        println(input!!.replace(find, replace))
+        println(input.replace(find, replace))
     }
 
     companion object {

@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 
-
 class ReplaceTest {
 
     private var ctx = ApplicationContext.run(Environment.CLI, Environment.TEST)
