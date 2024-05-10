@@ -93,11 +93,15 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>io.micronaut.maven</groupId>
                 <artifactId>micronaut-maven-plugin</artifactId>
+                <configuration>
+                    <configFile>aot-${packaging}.properties</configFile>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -140,6 +144,11 @@
                                 <annotationProcessorPath>
                                     <groupId>io.micronaut</groupId>
                                     <artifactId>micronaut-graal</artifactId>
+                                    <version>${micronaut.core.version}</version>
+                                </annotationProcessorPath>
+                                <annotationProcessorPath>
+                                    <groupId>io.micronaut</groupId>
+                                    <artifactId>micronaut-http-validation</artifactId>
                                     <version>${micronaut.core.version}</version>
                                 </annotationProcessorPath>
                                 <annotationProcessorPath>

@@ -11,12 +11,13 @@ import java.nio.file.Paths
 
 /**
  * https://micronaut-projects.github.io/micronaut-picocli/latest/guide/
+ * https://guides.micronaut.io/latest/micronaut-creating-first-graal-app-maven-java.html
  */
 @Command(name = "replace", description = ["An app to find and replace stuff in files or in input text."], mixinStandardHelpOptions = true)
 class Replace : Runnable {
 
     @CommandLine.Option(names = ["-f", "--file"], paramLabel = "ARCHIVE", description = ["The inputfile"])
-    private var archive: File? = null
+    private var file: File? = null
 
     @CommandLine.Option(names = ["-t", "--text"], paramLabel = "ARCHIVE", description = ["The input text"])
     private var input: String? = null
@@ -28,8 +29,12 @@ class Replace : Runnable {
     private var replace: String = ""
 
     override fun run() {
-        if (archive != null) {
-            input = String(Files.readAllBytes(Paths.get(archive!!.toURI())))
+        if(file==null && input==null){
+            println("Input is empty!")
+            return
+        }
+        if (file != null) {
+            input = String(Files.readAllBytes(Paths.get(file!!.toURI())))
         }
         println(input!!.replace(find, replace))
     }
