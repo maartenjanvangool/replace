@@ -19,7 +19,7 @@ class Replace : Runnable {
     @CommandLine.Option(names = ["-f", "--file"], paramLabel = "<filename>", description = ["input is a file path"])
     private var isFile: Boolean = false
 
-    @CommandLine.Option(names = ["--first"], paramLabel = "Replace the first occurrence (if any exist) only")
+    @CommandLine.Option(names = ["--first"], description = ["Replace the first occurrence (if any exist) only"])
     private var firstOnly: Boolean = false
 
     @Parameters(index = "0", description = ["Input, either a file or a literal"])
